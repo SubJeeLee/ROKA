@@ -1,0 +1,486 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+:root {
+    --size: max(5px,1vmin);
+    --heght: 80em;
+    --pad: 1.25em;
+    --border-radius: 6.666em;
+    --gutter: calc(var(--pad) * 2);
+    --button-width: 0.333em;
+    --ease: cubic-bezier(.666, 0, -4, 1);
+    --ease-spring: cubic-bezier(.666, 0, .4, 1.2);
+    --ease-out: cubic-bezier(.15, 0, .333, 1);
+    --border-width: 0.4em;
+    --deep-purple: 284;
+    --gold: 30;
+    --space-black: 215;
+    --silver: 254;
+    --c-h: var(--deep-purple);
+    --c-s: 100%;
+    --c-l: 50%;
+}
+
+@-webkit-keyframes appear {
+    to{
+        transform: scale3d(1,1,1);
+        opacity: 1;
+    }
+}
+
+@keyframes appear {
+    to{
+        transform: scale3d(1,1,1);
+        opacity: 1;
+    }
+}
+
+body {
+    background: black;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Inter';
+    font-size: var(--size);
+}
+
+.iphone-frame {
+    position: relative;
+    z-index: 1;
+    aspect-ratio: 37/76;
+    background: black;
+    height: var(--heght);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 0.1em 0.25em hsl(var(--c-h), 20%, 25%), 0 0 0 var(--border-width) hsl(var(--c-h), 30%, 85%);
+    box-sizing: border-box;
+    opacity: 0;
+    transform: scale3d(1.1, 1.1, 1);
+    -webkit-animation: appear 1s var(--ease-out) forwards;
+    animation: appear 1s var(--ease-out) forwards;
+    -webkit-backface-visibility: hidden;
+}
+
+.iphone-frame::before {
+    content: "";
+    position: absolute;
+    top: var(--border-radius);
+    right: calc(var(--border-width) * -1);
+    bottom: calc(var(--border-radius));
+    left: calc(var(--border-width) * -1);
+    border: 0.5em solid hsl(var(--c-h), 20%, 30%);
+    border-left-width: 0;
+    border-right-width: 0;
+}
+.nav {
+    position: absolute;
+    top: 3%;
+    width: 100%;
+    height: 5%;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    /* visibility: hidden; */
+}
+.nav .left {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.4em;
+    padding-left: 16.5%;
+}
+.nav .right {
+    padding-right: 12%;
+}
+.nav .right ion-icon {
+    color: #fff;
+    font-size: 1.7em;
+    padding-right: 0.15em;
+}
+
+
+.buttons {
+    position: absolute;
+    inset: calc(var(--border-width) * -1);
+    pointer-events: none;
+}
+
+.buttons .left, .buttons .right {
+    position: absolute;
+    width: var(--border-width);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5em;
+}
+
+.buttons .left{
+    right: 100%;
+    top: calc(var(--border-radius) * 2);
+}
+
+.buttons .left .button:nth-child(1) {
+    height: 3em;
+    margin-bottom: 0.5em;
+}
+.buttons .right {
+    left: 100%;
+    transform: scale3d(-1, 1, 1);
+    top: calc(var(--border-radius) * 3);
+}
+
+.buttons .right .button {
+    height: 9.5em;
+}
+
+.buttons .button {
+    background: hsl(var(--c-h), 20%, 95%);
+    height: 6em;
+    box-shadow: inset -0.15em 0 0.1em black, inset 0 0 0.1em hsl(var(--c-h), 30%, 90%), inset 0 0.2em 0.1em hsl(var(--c-h), 30%, 90%), inset 0 -0.2em 0.1em
+    hsl(var(--c-h), 30%, 90%), inset -0.1em 0.333em 0.1em rgba(0, 0, 0, 0.5em), inset -0.1em -0.333em 0.1em rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 0.2em;
+    border-bottom-left-radius: 0.2em;
+}
+
+.screen-container {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--border-radius);
+    border: var(--pad) solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--pad) * 2);
+}
+.screen-container::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    background: white;
+    width: 36.6%;
+    bottom: calc(var(--pad) * 0.75);
+    height: calc(var(--pad) * 0.5);
+    border-radius: calc(var(--pad) * 0.25);
+    filter: drop-shadow(0 0.1em 0.25em rgba(0, 0, 0, 0.1));
+}
+.bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("Iphone-bg.jpg");
+    background-size: cover; /* 이미지 크기를 요소에 맞게 조정 */
+    background-position: center; /* 이미지를 요소의 가운데로 정렬 */
+    background-repeat: no-repeat; /* 이미지 반복 없음 */
+    border-radius: calc(var(--border-radius) - var(--pad));
+    overflow: hidden;
+}
+.bg>* {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 1s var(--ease-out) 0.5s;
+}
+.screen-container .camera {
+    z-index: 5;
+    width: 28%;
+    height: 3.4%;
+    margin-top: 2.5%;
+    border-radius: var(--border-radius);
+    background-color: black;
+}
+/* .screen-container .camera .left {
+    z-index: 6;
+    position: relative;
+    left: 5%;
+    top: 18%;
+    background: radial-gradient(50% 50% at 55% 40%, #131386, #cd1385 75%, transparent) center/133.3% 133.3%;
+    width: 13%;
+    height: 60%;
+    border-radius: var(--border-radius);
+} */
+.screen-container .camera .right {
+    z-index: 6;
+    position: absolute;
+    top: 2.25%;
+    left: 58%;
+    border-radius: var(--border-radius);
+    width: 3%;
+    height: 1.4%;
+    box-shadow: inset 0 0 0.25em #4c4da3;
+    background: radial-gradient(#6667ac, transparent 50%) no-repeat 33.3% 10%/75% 50%, radial-gradient(#454680, transparent 50%) no-repeat 60% 85%/50% 50%;
+}
+
+
+    /* Screen Lock Page */
+    /* ---------------------------- */
+
+.lock-screen {
+    z-index: 2;
+    position: absolute;
+    top: 0%;
+    transition: .5s;
+    overflow: hidden;
+    left: 0%;
+    height: 0%;
+    width: 100%;
+}
+.lock-screen.active {
+    height: 100% !important;
+}
+.lock-screen .time {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8%;
+    width: 100%;
+    text-align: center;
+}
+.lock-screen .time h1 {
+    font-size: 7em;
+    margin: 0;
+    height: 0%;
+    color: rgb(255,255,255,0.829);
+}
+.lock-screen .time span {
+    font-size: 1.8em;
+    color: rgb(255,255,255,0.829);
+}
+
+.scr-lock-nav {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.2em;
+}
+.scr-lock-nav button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 2.2em;
+    color: #fff;
+    border: 0ch;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.452);
+}
+.scr-lock-nav .left {
+    padding-left: 8.5%;
+}
+.scr-lock-nav .right {
+    padding-right: 10%;
+}
+.scr-lock-nav button ion-icon.flashlight {
+    transform: rotate(-45deg);
+}
+/* .button {
+    position: absolute;
+    bottom: 5px;
+    height: 2px;
+    border-radius: 20px;
+    width: 90px;
+    left: 50%;
+    z-index: 102;
+    background-color: #fff;
+    transform: translateX(-50%);
+} */
+.open-button {
+    position: absolute;
+    bottom: 5%;
+    font-size: 1.35em;
+    color: #fff;
+    height: 3.5%;
+    width: fit-content;
+    padding: 2% 3%;
+    cursor: pointer;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.application-menu {
+    z-index: 3;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    transform: scale(5);
+    visibility: hidden;
+    overflow: hidden;
+}
+.application-menu.active {
+    transform: scale(1);
+    visibility: visible;
+}
+
+/* BOTTOM-NAV */
+.bottom-navigation {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 4%;
+    width: 90%;
+    height: fit-content;
+    left: 3%;
+    right: 0%;
+    border-radius: 2.5em;
+    padding: 3% 2%;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(255,255,255,0.317);
+}
+.bottom-navigation .button-app {
+    cursor: pointer;
+    width: 18%;
+    height: 1.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #fff;
+    border-radius: .3em;
+    font-size: 4em;
+}
+.bottom-navigation .button-app img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.bottom-navigation .button-app img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+
+.applications {
+    position: absolute;
+    left: 0%;
+    top: -7%;
+    transition-property: transform;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+.slide-1 {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    /* transition: .7s;     */
+    left: 0%;
+}
+.icon-sect {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 9%;
+    justify-content: space-evenly;
+}
+.button-app {
+    cursor: pointer;
+    width: 14%;
+    height: 1.4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: .3em;
+    font-size: 4em;
+}
+.button-app img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.button-app img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+.widget {
+    display: flex;
+    position: absolute;
+    left: 6%;
+    background-color: rgba(255, 255, 255, 0.4);
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 88%;
+    height: 20%;
+    border-radius: 2em;
+}
+.widget .widget_container {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    bottom: 5%;
+}
+.widget label {
+    position: absolute;
+    top: 105%;
+    color: #fff;
+    font-size: 0.3em;
+}
+.widget .call_list {
+    width: 10%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}
+.widget .call_list .circle {
+    background-color: rgb(201, 201, 201);
+    width: 200%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+}
+.widget .call_list img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+}
+.widget .call_list label {
+    display: inline-block;
+    position: absolute;
+    top: 100%;
+    color: black;
+    font-size: 0.1em;
+}
+
+.icon-sect label {
+    position: relative;
+    white-space: nowrap; 
+    top: 7%;
+    font-size: 0.3em;
+    color: #fff;
+}
+.swiper-pagination {
+    bottom: 16.5% !important;
+}
+.swiper-pagination-bullet {
+    background: #fff !important;
+    height: 0.8em !important;
+    width: 0.8em !important;
+}
+
+
+
+
