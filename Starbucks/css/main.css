@@ -583,3 +583,13 @@ header .badges .badge {
 .youtube .inner {
   height: inherit;
 }
+.youtube .floating1 {
+  position: absolute;
+  top: 50px;
+  left: 0;
+}
+.youtube .floating2 {
+  position: absolute;
+  top: 350px;
+  left: 150px;
+}
