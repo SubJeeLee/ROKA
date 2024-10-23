@@ -33,6 +33,11 @@ window.addEventListener('scroll', _.throttle(function () {
       opacity: 0,
       display: 'none'
     })
+    // 상단으로 스크롤 버튼 보이기!
+    gsap.to(toTopEl, .2, {
+      x: 0
+    })
+
   // 페이지 스크롤 위치가 500px이 넘지 않으면.
   } else {
     // Badge 요소 보이기!
@@ -40,8 +45,19 @@ window.addEventListener('scroll', _.throttle(function () {
       opacity: 1,
       display: 'block'
     })
+    // 상단으로 스크롤 버튼 숨기기!
+    gsap.to(toTopEl, .2, {
+      x: 100
+    })
   }
 }, 300))
+// 상단으로 스크롤 버튼을 클릭하면,
+toTopEl.addEventListener('click', function () {
+  // 페이지 위치를 최상단으로 부드럽게(0.7초 동안) 이동.
+  gsap.to(window, .7, {
+    scrollTo: 0
+  })
+})
 
 
 /**
